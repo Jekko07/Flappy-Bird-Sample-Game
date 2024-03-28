@@ -1,6 +1,7 @@
 A Flappy Bird Game created using HTML, CSS and Javascript
 
-![bird2](https://github.com/Jekko07/Flappy-Bird-Sample-Game/assets/23499091/f5617c20-0de5-4f27-b0c0-6c5a2d775e39)
+![Screenshot 2024-03-29 003945](https://github.com/Jekko07/Flappy-Bird-Sample-Game/assets/23499091/d60b4284-0194-4856-95df-70d07745eada)
+
 
 
 
