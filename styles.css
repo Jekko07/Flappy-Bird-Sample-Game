@@ -65,6 +65,7 @@
     left: 0;
     margin: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
 }
 .score_value{
     color: gold;
