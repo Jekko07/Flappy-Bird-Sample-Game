@@ -4,10 +4,10 @@ let img = document.getElementById('bird-1');
 let sound_point = new Audio('sounds effect/point.mp3');
 let sound_die = new Audio('sounds effect/die.mp3')
 
-// getting bird element properties
+// getting bird element properties and determining the coordinates of the bird
 let bird_props = bird.getBoundingClientRect();
 
-// This method returns DOMReact -> top, right, bottom, left, x, y, width and height
+// This method returns DOMReact -> top, right, bottom, left, x, y, width and height GETS THE COORDINATES OF THE BIRD
 let background = document.querySelector('.background').getBoundingClientRect();
 
 let score_value = document.querySelector('.score_value');
@@ -18,8 +18,9 @@ let game_state = 'Start';
 img.style.display = 'none';
 message.classList.add('messageStyle');
 
+//creates a function when enter is pressed starts the game
+//When Enter is clicked the game state will be turned to 'Play'
 document.addEventListener('keydown', (e) => {
-    
     if (e.key == 'Enter' && game_state != 'Play') {
         document.querySelectorAll('.pipe_sprite').forEach((e) => {
             e.remove();
@@ -67,27 +68,29 @@ function play() {
                 }
             }
         });
-        requestAnimationFrame(move);
+        requestAnimationFrame(move); //animation method in js to update the animation
     }
-    requestAnimationFrame(move);
+    requestAnimationFrame(move); //animation method in js to update the animation
 
+    //function that initiates switches the birds movements when the game starts
     let bird_dy = 0;
     function apply_gravity() {
-        if (game_state != 'Play') return;
+        if (game_state != 'Play') return; //game will finish 
         bird_dy = bird_dy + gravity;
         document.addEventListener('keydown', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
+            if (e.key == 'ArrowUp' || e.key == ' ') { //if arrow up is clicked or space is clicked switch to bird2.png
                 img.src = 'img/bird2.png';
                 bird_dy = -7.6;
             }
         });
 
         document.addEventListener('keyup', (e) => {
-            if (e.key == 'ArrowUp' || e.key == ' ') {
+            if (e.key == 'ArrowUp' || e.key == ' ') { //if arrow up is clicked or space is clicked again switch to bird2.png
                 img.src = 'img/bird.png';
             }
         });
 
+        //if the bird falls down
         if (bird_props.top <= 0 || bird_props.bottom >= background.bottom){
             game_state = 'End';
             message.style.left = '28vw';
@@ -97,19 +100,21 @@ function play() {
         }
         bird.style.top = bird_props.top + bird_dy + 'px';
         bird_props = bird.getBoundingClientRect();
+        //animation method in js to update the animation
         requestAnimationFrame(apply_gravity);
     }
-    requestAnimationFrame(apply_gravity);
+    requestAnimationFrame(apply_gravity); //animation method in js to update the animation
 
     let pipe_separation = 0;
     let pipe_gap = 35;
 
+    //function to create random pipes
     function create_pipe() {
         if (game_state != 'Play') return;
 
         if (pipe_separation > 115) {
             pipe_separation = 0;
-            
+            //initializes random pipes and sizes
             let pipe_posi = Math.floor(Math.random() * 43) + 8;
             let pipe_sprite_inv = document.createElement('div');
             pipe_sprite_inv.className = 'pipe_sprite';
@@ -122,11 +127,11 @@ function play() {
             pipe_sprite.style.top = pipe_posi + pipe_gap + 'vh';
             pipe_sprite.style.left = '100vw';
             pipe_sprite.increase_score = '1';
-
+            //adding or creating pipes
             document.body.appendChild(pipe_sprite);
         }
         pipe_separation++;
-        requestAnimationFrame(create_pipe);
+        requestAnimationFrame(create_pipe); //animation method in js to update the animation
     }
-    requestAnimationFrame(create_pipe);
+    requestAnimationFrame(create_pipe); //animation method in js to update the animation
 }
